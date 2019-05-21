@@ -19,10 +19,15 @@ public class CheckOutRecord {
     @NotNull(message = "* Date supplied is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate checkOutDate;
+
     @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    @NotNull(message = "* User is required")
     private User user;
+
     @ManyToOne
     private BookCopy bookCopy;
+
 
     public CheckOutRecord() {
     }

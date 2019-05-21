@@ -12,6 +12,11 @@ public class Location {
     private int section;
     private int row;
 
+    @OneToOne
+
+    private Book book;
+
+
     public Location() {
 
     }
@@ -42,5 +47,13 @@ public class Location {
 
     public void setRow(int row) {
         this.row = row;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

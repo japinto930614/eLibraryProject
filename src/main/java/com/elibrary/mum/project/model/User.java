@@ -1,6 +1,9 @@
 package com.elibrary.mum.project.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.util.List;
 
 public class User {
     private Long id;
@@ -11,6 +14,20 @@ public class User {
     private String email;
     private LocalDate registrationDate;
     private double overduefine;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CheckOutRecord> checkOutRecords;
+
+
+    private CheckinRecord checkinRecord;
+
+    public CheckinRecord getCheckinRecord() {
+        return checkinRecord;
+    }
+
+    public void setCheckinRecord(CheckinRecord checkinRecord) {
+        this.checkinRecord = checkinRecord;
+    }
 
     public Long getId() {
         return id;
