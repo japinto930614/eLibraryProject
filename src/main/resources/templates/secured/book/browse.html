@@ -10,12 +10,18 @@
 <th:block layout:fragment="content">
     <div>
         <span style="font-size: 1.5em">List of Books in stock</span>
+<!--        <form action="/action_page.php">-->
+<!--            <input type="text" name="fname">-->
+<!--            <input type="submit" value="Search">-->
+<!--        </form>-->
+
+
+    </div>
+    <div class="search-container">
         <form action="/action_page.php">
-            <input type="text" name="fname">
-            <input type="submit" value="Search">
+            <input style="padding-left:16px" type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="btn-btn-success">Search</i></button>
         </form>
-
-
     </div>
     <p>&nbsp;</p>
     <table class="table table-hover">
