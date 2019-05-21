@@ -14,7 +14,8 @@ import java.util.function.LongBinaryOperator;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Long BookId;
+    public Long bookId;
+    private Long bookNumber;
     private String title;
     private String ISBN;
     private String Author;
@@ -46,11 +47,11 @@ public class Book {
     }
 
     public Long getBookId() {
-        return BookId;
+        return bookId;
     }
 
     public void setBookId(Long bookId) {
-        BookId = bookId;
+        this.bookId = bookId;
     }
 
     public String getTitle() {
