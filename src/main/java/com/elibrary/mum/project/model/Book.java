@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.LongBinaryOperator;
 
 @Entity
 @Table(name = "BOOKS")
@@ -28,8 +27,10 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<BookCopy> bookCopies;
 
-    @OneToOne
-    private Location location;
+    @ManyToOne()
+    @JoinColumn(name = "positionId", nullable = false)
+    @NotNull(message = "* Position is required")
+    private Position position;
 
     public void setBookNumber(Long bookNumber) {
         this.bookNumber = bookNumber;
@@ -53,12 +54,12 @@ public class Book {
 
 
 
-    public Location getLocation() {
-        return location;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public Book() {
