@@ -16,15 +16,20 @@ public class CheckinRecord {
     private List<BookCopy> bookCopies;
 
 
-    @OneToMany(mappedBy = "checkinRecord", cascade = CascadeType.ALL)
-    private List<User> users = new ArrayList<>();
+
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
     @NotNull(message = "* User is required")
     private User user;
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getCheckingRecordId() {
         return checkingRecordId;
@@ -42,11 +47,5 @@ public class CheckinRecord {
         this.bookCopies = bookCopies;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }

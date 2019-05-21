@@ -23,14 +23,14 @@ public class User {
     private List<CheckOutRecord> checkOutRecords;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private CheckinRecord checkinRecord;
+    private List<CheckinRecord> checkinRecords;
 
-    public CheckinRecord getCheckinRecord() {
-        return checkinRecord;
+    public List<CheckinRecord> getCheckinRecords() {
+        return checkinRecords;
     }
 
-    public void setCheckinRecord(CheckinRecord checkinRecord) {
-        this.checkinRecord = checkinRecord;
+    public void setCheckinRecords(List<CheckinRecord> checkinRecords) {
+        this.checkinRecords = checkinRecords;
     }
 
     public void setUserId(Long userId) {
