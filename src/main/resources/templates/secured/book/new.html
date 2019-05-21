@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{secured/layouts/master-page-layout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/product/product.css}" />
+    <title>HighVay - SRM - Add a New Product</title>
+</head>
+<body> <!--onload="document.querySelector('#productNumber').focus();"-->
+    <th:block layout:fragment="content">
+        <form id="productForm" method="post" action="/srm/secured/product/new" th:object="${product}">
+            <fieldset>
+                <legend>New Product Form</legend>
+                <div class="container" style="margin-top: 1em;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="hidden" name="productId" th:value="${product.productId}" />
+                            <div class="form-group">
+                                <label for="productNumber">Product Number</label>
+                                <small><span th:if="${#fields.hasErrors('productNumber')}" th:errors="*{productNumber}"
+                                      class="alert alert-danger"></span></small>
+                                <input id="productNumber" name="productNumber" type="text" class="form-control" th:value="${product.productNumber}" required autofocus="autofocus">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                      class="alert alert-danger"></span>
+                                <input id="name" name="name" type="text" class="form-control" th:value="${product.name}" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="unitPrice">Unit Price</label>
+                                <span th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"
+                                      class="alert alert-danger"></span>
+                                <input id="unitPrice" name="unitPrice" type="text" class="form-control" th:value="${product.unitPrice}" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="quantityInStock">Quantity in stock</label>
+                                <span th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"
+                                      class="alert alert-danger"></span>
+                                <input id="quantityInStock" name="quantityInStock" type="text" class="form-control" th:value="${product.quantityInStock}" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label for="supplier">Supplier:</label>
+                                <span th:if="${#fields.hasErrors('supplier')}" th:errors="*{supplier}"
+                                      class="alert alert-danger"></span>
+                                <select name="supplier" id="supplier" class="form-control" required="required">
+                                    <option value="">Select a supplier</option>
+                                    <option th:each="supplier : ${suppliers}" th:value="${supplier.supplierId}" th:text="${supplier.name}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateSupplied">Date supplied</label>
+                                <span th:if="${#fields.hasErrors('dateSupplied')}" th:errors="*{dateSupplied}"
+                                      class="alert alert-danger"></span>
+                                <input id="dateSupplied" name="dateSupplied" type="date" class="form-control" aria-describedby="dateSuppliedHelp" th:value="${product.dateSupplied}" required="required">
+                                <small id="dateSuppliedHelp" class="form-text text-muted">Enter a valid Date.</small>
+                            </div>
+                            <div style="float:right;">
+                                <button id="btnReset" type="reset" class="btn btn-outline-info" style="margin-right: 2em;">Reset</button>
+                                <a href="/srm/secured/product/browse" class="btn btn-outline-warning" style="margin-right: 2em;">Cancel</a>
+                                <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add Product</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </th:block>
+    <br/>
+    <br/>
+    <th:block layout:fragment="footer"/>
+
+</body>
+</html>

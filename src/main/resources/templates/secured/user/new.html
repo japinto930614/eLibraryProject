@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{secured/layouts/master-page-layout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/supplier/supplier.css}" />
+    <title>HighVay - SRM - Add a New Supplier</title>
+</head>
+<body onload="document.querySelector('#supplierNumber').focus();">
+    <th:block layout:fragment="content">
+        <form id="supplierForm" method="post" action="/srm/secured/supplier/new" th:object="${supplier}">
+            <fieldset>
+                <legend>New Supplier Form</legend>
+                <input type="hidden" name="supplierId" th:value="${supplier.supplierId}" />
+                <div class="form-group" style="margin-top: 1em;">
+                    <label for="supplierNumber">Supplier Number:</label>
+                    <span th:if="${#fields.hasErrors('supplierNumber')}" th:errors="*{supplierNumber}"
+									class="alert alert-danger"></span>
+                    <input id="supplierNumber" name="supplierNumber" type="text" class="form-control" value="" th:value="${supplier.supplierNumber}" required autofocus />
+                </div>
+                <div class="form-group">
+                        <label for="name">Name:</label>
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                        class="alert alert-danger"></span>
+                        <input id="name" name="name" type="text" class="form-control" th:value="${supplier.name}">
+                </div>               
+                <div class="form-group">
+                        <label for="contactPhoneNumber">Contact Phone Number:</label>
+                        <span th:if="${#fields.hasErrors('contactPhoneNumber')}" th:errors="*{contactPhoneNumber}"
+                            class="alert alert-danger"></span>
+                        <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel" class="form-control" aria-describedby="contactPhoneNumberHelp" th:value="${supplier.contactPhoneNumber}">
+                        <small id="contactPhoneNumberHelp" class="form-text text-muted">Enter the phone number in a valid Format. e.g. (123) 456-7890</small>
+                </div>    
+                <div style="float:right;">
+                    <a href="/srm/secured/supplier/browse" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add Supplier</button>
+                </div>
+            </fieldset>
+        </form>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

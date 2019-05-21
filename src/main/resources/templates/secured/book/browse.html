@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{secured/layouts/master-page-layout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/product/product.css}" />
+    <title>HighVay - SRM - Browsing List of Products</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <span style="font-size: 1.5em">List of Products in stock</span>
+        <span style="float:right;">
+                <a class="btn btn-outline-primary btn-lg" href="/srm/secured/product/new">Add a New Product</a>
+            </span>
+    </div>
+    <p>&nbsp;</p>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Number</th>
+            <th scope="col">Name</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Qty in Stock</th>
+            <th scope="col">Supplier</th>
+            <th scope="col">Date Supplied</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Alternative non-obstrusive js solution for <tr onclick>:
+            HTML markup: <tr data-href="some-url">
+            JS function using JQuery: $('tr[data-href]').on("click", function() {
+                                        document.location = $(this).data('href');
+                                    });
+         -->
+        <!--<tr class="datarow" th:each="book,iterStat : ${products}" th:onclick="@{document.location='/prodmgmt/products/edit/{productId}'(productId=${book.productId})}">-->
+        <tr class="datarow" th:each="product,iterStat : ${products}" th:onclick="@{document.location='#'}">
+            <th scope="row" th:text="${iterStat.count}+'.'"></th>
+            <td th:text="${product.productNumber}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${#numbers.formatCurrency(product.unitPrice)}"></td>
+            <td th:text="${product.quantityInStock}"></td>
+            <td th:text="${product.supplier.name}"></td>
+            <td th:text="${product.dateSupplied}"></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>
