@@ -12,7 +12,7 @@ public class BookCopy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookCopyId;
-    private Long bookCopyNumber;
+    private int bookCopyNumber;
 
     @ManyToOne()
     @JoinColumn(name = "bookId", nullable = false)
@@ -30,11 +30,11 @@ public class BookCopy {
         this.bookCopyId = bookCopyId;
     }
 
-    public Long getBookCopyNumber() {
+    public int getBookCopyNumber() {
         return bookCopyNumber;
     }
 
-    public void setBookCopyNumber(Long bookCopyNumber) {
+    public void setBookCopyNumber(int bookCopyNumber) {
         this.bookCopyNumber = bookCopyNumber;
     }
 

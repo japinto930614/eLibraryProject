@@ -9,4 +9,5 @@ public interface IUserService {
     User addUser(User user);
     List<User> getAllUsers();
     Optional<User> findByUserNumber(Long userNumber);
+    void delete(User user);
 }

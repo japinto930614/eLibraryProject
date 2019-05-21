@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserTypeService {
-    User addUserType(UserType userType);
+    UserType addUserType(UserType userType);
     List<UserType> getAllUserTypes();
     Optional<UserType> findByUserTypeById(int userTypeId);
+    void deleteUserType(UserType userType);
 }

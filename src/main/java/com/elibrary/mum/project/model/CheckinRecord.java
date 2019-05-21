@@ -10,7 +10,7 @@ import java.util.List;
 public class CheckinRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int checkingRecordId;
+    private Long checkingRecordId;
 
 
     @ManyToOne()
@@ -34,11 +34,11 @@ public class CheckinRecord {
         this.user = user;
     }
 
-    public int getCheckingRecordId() {
+    public Long getCheckingRecordId() {
         return checkingRecordId;
     }
 
-    public void setCheckingRecordId(int checkingRecordId) {
+    public void setCheckingRecordId(Long checkingRecordId) {
         this.checkingRecordId = checkingRecordId;
     }
 

@@ -12,7 +12,7 @@ public class CheckOutRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long bookCopyId;
+    private Long checkOutRecordId;
     @NotNull(message = "* Date supplied is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate overdureDate;
@@ -32,12 +32,12 @@ public class CheckOutRecord {
     public CheckOutRecord() {
     }
 
-    public Long getBookCopyId() {
-        return bookCopyId;
+    public Long getCheckOutRecordId() {
+        return checkOutRecordId;
     }
 
-    public void setBookCopyId(Long bookCopyId) {
-        this.bookCopyId = bookCopyId;
+    public void setCheckOutRecordId(Long checkOutRecordId) {
+        this.checkOutRecordId = checkOutRecordId;
     }
 
     public LocalDate getOverdureDate() {
