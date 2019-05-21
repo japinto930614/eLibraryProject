@@ -3,6 +3,9 @@ package com.elibrary.mum.project.controller.viewctrl;
 
 
 import com.elibrary.mum.project.model.User;
+import com.elibrary.mum.project.service.impl.UserService;
+import com.elibrary.mum.project.service.impl.UserTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,22 +21,23 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value = "/eLibraryFinal/secured/user")
 public class UserController {
-
-//    @Autowired
-//    private ISupplierService supplierService;
+    @Autowired
+     private UserService userService;
+    @Autowired
+     private UserTypeService userTypeService;
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfSuppliers() {
         ModelAndView modelAndView = new ModelAndView();
-//        List<Supplier> suppliers = supplierService.getAllSuppliers();
-//        modelAndView.addObject("suppliers", suppliers);
+        modelAndView.addObject("users",  userService.getAllUsers());
         modelAndView.setViewName("secured/user/browse");
         return modelAndView;
     }
 
     @GetMapping(value = "/new")
     public String newSupplierForm(Model model) {
-//        model.addAttribute("user", new Supplier());
+        model.addAttribute("user", new User());
+        model.addAttribute("userTypes",userTypeService.getAllUserTypes());
         return "secured/user/new";
     }
 
@@ -42,10 +46,11 @@ public class UserController {
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("userTypes",userTypeService.getAllUserTypes());
             return "secured/user/new";
         }
-//        user = supplierService.addNewSupplier(user);
-        return "redirect:/srm/secured/user/browse";
+        user = userService.addUser(user);
+        return "redirect:/secured/user/browse";
     }
 
 
