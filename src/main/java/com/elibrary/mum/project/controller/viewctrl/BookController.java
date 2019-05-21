@@ -1,54 +1,68 @@
 package com.elibrary.mum.project.controller.viewctrl;
 
 
+import com.elibrary.mum.project.model.Book;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value = "/eLibraryFinal/secured/product")
+@RequestMapping(value = "/eLibraryFinal/secured/book")
 public class BookController {
-/*
-    @Autowired
+
+   /* @Autowired
     private IProductService productService;
 
     @Autowired
-    private ISupplierService supplierService;
+    private ISupplierService supplierService;*/
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfProducts() {
-        ModelAndView modelAndView = new ModelAndView();
+        /*ModelAndView modelAndView = new ModelAndView();
         List<Product> products = productService.getAllProducts();
         modelAndView.addObject("products", products);
         modelAndView.setViewName("secured/product/browse");
-        return modelAndView;
+        return modelAndView;*/
+        return null;
     }
 
     @GetMapping(value = "/new")
 //    public ModelAndView newProductForm(Model model) {
     public String newProductForm(Model model) {
-//        ModelAndView modelAndView = new ModelAndView();
+/*
+        //        ModelAndView modelAndView = new ModelAndView();
         List<Supplier> suppliers = supplierService.getAllSuppliers();
 //        modelAndView.addObject("suppliers", suppliers);
 //        modelAndView.setViewName("secured/book/new");
         model.addAttribute("product", new Product());
         model.addAttribute("suppliers", suppliers);
 //        return modelAndView;
-        return "secured/product/new";
+        return "secured/product/new"; */
+        return null;
     }
 
     @PostMapping(value = "/new")
-    public String addNewProduct(@Valid @ModelAttribute("product") Product product,
+    public String addNewProduct(@Valid @ModelAttribute("book") Book book,
                                 BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("errors", bindingResult.getAllErrors());
+           /* model.addAttribute("errors", bindingResult.getAllErrors());
             List<Supplier> suppliers = supplierService.getAllSuppliers();
             model.addAttribute("suppliers", suppliers);
-            return "secured/product/new";
+            return "secured/product/new";*/
         }
-        product = productService.addNewProduct(product);
-        return "redirect:/srm/secured/book/browse";
+      /*  product = productService.addNewProduct(product);
+        return "redirect:/srm/secured/book/browse";*/
+
+      return null;
     }
 
 
- */
+
 }
