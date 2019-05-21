@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.function.LongBinaryOperator;
 
 @Entity
-@Table(name = "BOOKs")
+@Table(name = "BOOKS")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,5 +62,13 @@ public class Book {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+    public LocalDate getDateAdd() {
+        return dateAdd;
+    }
+
+    public void setDateAdd(LocalDate dateAdd) {
+        this.dateAdd = dateAdd;
     }
 }
