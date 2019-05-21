@@ -5,10 +5,10 @@ import com.elibrary.mum.project.model.Book;
 import java.util.List;
 
 public interface IBookService {
-     void addBook();
+     Book addBook(Book book);
      List<Book> getListOfBook();
-     boolean removeOfBook(Book book);
+     void removeBook(Book book);
      Book findOneBook(Long id);
-    void updateBook(Book book);
+
 
 }
