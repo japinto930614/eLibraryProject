@@ -10,6 +10,15 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int categoryId;
     private String categoryName;
+    private int categoryNumber;
+
+    public int getCategoryNumber() {
+        return categoryNumber;
+    }
+
+    public void setCategoryNumber(int categoryNumber) {
+        this.categoryNumber = categoryNumber;
+    }
 
     public Category(){
 

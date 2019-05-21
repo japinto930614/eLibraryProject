@@ -2,6 +2,8 @@ package com.elibrary.mum.project.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "BOOKCOPIES")
@@ -13,9 +15,12 @@ public class BookCopy {
     private Long bookCopyNumber;
 
     @ManyToOne()
-    @JoinColumn(name = "bookCopyId", nullable = false)
-    @NotNull(message = "* BookCopy is required is required")
-    private CheckinRecord checkinRecord;
+    @JoinColumn(name = "bookId", nullable = false)
+    @NotNull(message = "* BookCopyId is required")
+    private Book book;
+
+    @OneToMany(mappedBy = "bookCopy", cascade = CascadeType.ALL)
+    private List<CheckinRecord> checkinRecords = new ArrayList<>();
 
     public int getBookCopyId() {
         return bookCopyId;
@@ -27,5 +32,25 @@ public class BookCopy {
 
     public Long getBookCopyNumber() {
         return bookCopyNumber;
+    }
+
+    public void setBookCopyNumber(Long bookCopyNumber) {
+        this.bookCopyNumber = bookCopyNumber;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public List<CheckinRecord> getCheckinRecords() {
+        return checkinRecords;
+    }
+
+    public void setCheckinRecords(List<CheckinRecord> checkinRecords) {
+        this.checkinRecords = checkinRecords;
     }
 }

@@ -28,11 +28,11 @@
             	<!-- Alternative non-obstrusive js solution for <tr onclick>:
             		HTML markup: <tr data-href="some-url">
             		JS function using JQuery: $('tr[data-href]').on("click", function() {
-    											document.location = $(this).data('href');
+    											document.position = $(this).data('href');
 											});
             	 -->
-                <!--<tr class="datarow" th:each="user,iterStat : ${suppliers}" th:onclick="@{document.location='/srm/secured/user/edit/{supplierId}'(supplierId=${user.supplierId})}">-->
-                <tr class="datarow" th:each="supplier, iterStat : ${suppliers}" th:onclick="@{document.location='#'}">
+                <!--<tr class="datarow" th:each="user,iterStat : ${suppliers}" th:onclick="@{document.position='/srm/secured/user/edit/{supplierId}'(supplierId=${user.supplierId})}">-->
+                <tr class="datarow" th:each="supplier, iterStat : ${suppliers}" th:onclick="@{document.position='#'}">
                     <th scope="row" th:text="${iterStat.count}+'.'"></th>
                     <td th:text="${supplier.supplierNumber}"></td>
                     <td th:text="${supplier.name}"></td>
