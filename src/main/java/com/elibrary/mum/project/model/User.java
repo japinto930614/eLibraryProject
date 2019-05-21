@@ -24,13 +24,10 @@ public class User {
     private List<CheckOutRecord> checkOutRecords;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private CheckinRecord checkinRecord;
+    private List<CheckinRecord> checkinRecord;
 
-    public CheckinRecord getCheckinRecord() {
-        return checkinRecord;
-    }
 
-    public void setCheckinRecord(CheckinRecord checkinRecord) {
+    public void setCheckinRecord(List<CheckinRecord> checkinRecord) {
         this.checkinRecord = checkinRecord;
     }
 
