@@ -19,18 +19,19 @@ public class User {
     private LocalDate registrationDate;
     private double overduefine;
 
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CheckOutRecord> checkOutRecords;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CheckinRecord> checkinRecords;
+    private CheckinRecord checkinRecord;
 
-    public List<CheckinRecord> getCheckinRecords() {
-        return checkinRecords;
+    public CheckinRecord getCheckinRecord() {
+        return checkinRecord;
     }
 
-    public void setCheckinRecords(List<CheckinRecord> checkinRecords) {
-        this.checkinRecords = checkinRecords;
+    public void setCheckinRecord(CheckinRecord checkinRecord) {
+        this.checkinRecord = checkinRecord;
     }
 
     public void setUserId(Long userId) {
