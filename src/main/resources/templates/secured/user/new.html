@@ -3,37 +3,55 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	layout:decorate="~{secured/layouts/master-page-layout}">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/supplier/supplier.css}" />
-    <title>HighVay - SRM - Add a New Supplier</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/user/user.css}" />
+    <title>eLibrary - Add a New User</title>
 </head>
-<body onload="document.querySelector('#supplierNumber').focus();">
+<body onload="document.querySelector('#userNumber').focus();">
     <th:block layout:fragment="content">
-        <form id="supplierForm" method="post" action="/srm/secured/supplier/new" th:object="${supplier}">
+        <form id="userForm" method="post" action="/eLibraryFinal/secured/user/new" th:object="${user}">
             <fieldset>
-                <legend>New Supplier Form</legend>
-                <input type="hidden" name="supplierId" th:value="${supplier.supplierId}" />
+                <legend>New User Form</legend>
+                <input type="hidden" name="userId" th:value="${user.userId}" />
                 <div class="form-group" style="margin-top: 1em;">
-                    <label for="supplierNumber">Supplier Number:</label>
-                    <span th:if="${#fields.hasErrors('supplierNumber')}" th:errors="*{supplierNumber}"
+                    <label for="userNumber">User Number:</label>
+                    <span th:if="${#fields.hasErrors('userNumber')}" th:errors="*{userNumber}"
 									class="alert alert-danger"></span>
-                    <input id="supplierNumber" name="supplierNumber" type="text" class="form-control" value="" th:value="${supplier.supplierNumber}" required autofocus />
+                    <input id="userNumber" name="userNumber" type="text" class="form-control" value="" th:value="${user.userNumber}" required autofocus />
                 </div>
                 <div class="form-group">
-                        <label for="name">Name:</label>
-                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                        <label for="firstName">First name:</label>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
                                         class="alert alert-danger"></span>
-                        <input id="name" name="name" type="text" class="form-control" th:value="${supplier.name}">
-                </div>               
+                        <input id="firstName" name="firstName" type="text" class="form-control" th:value="${user.firstName}">
+                </div>
+
                 <div class="form-group">
-                        <label for="contactPhoneNumber">Contact Phone Number:</label>
-                        <span th:if="${#fields.hasErrors('contactPhoneNumber')}" th:errors="*{contactPhoneNumber}"
-                            class="alert alert-danger"></span>
-                        <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel" class="form-control" aria-describedby="contactPhoneNumberHelp" th:value="${supplier.contactPhoneNumber}">
-                        <small id="contactPhoneNumberHelp" class="form-text text-muted">Enter the phone number in a valid Format. e.g. (123) 456-7890</small>
-                </div>    
+                    <label for="lastName">Last name:</label>
+                    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                          class="alert alert-danger"></span>
+                    <input id="lastName" name="lastName" type="text" class="form-control" th:value="${user.lastName}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                          class="alert alert-danger"></span>
+                    <input id="email" name="email" type="text" class="form-control" th:value="${user.email}">
+                </div>
+
+                <div class="form-group">
+                    <label for="userType">User Type:</label>
+                    <span th:if="${#fields.hasErrors('accountType')}" th:errors="*{accountType}"
+                          class="alert alert-danger"></span>
+                    <select name="accountType" id="accountType" class="form-control" required="required">
+                        <option value="">Select an account type</option>
+                        <option th:each="accountType : ${accountTypes}" th:value="${accountType.accountTypeId}" th:text="${accountType.accountTypeName}"></option>
+                    </select>
+                </div>
+
                 <div style="float:right;">
-                    <a href="/srm/secured/supplier/browse" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                    <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add Supplier</button>
+                    <a href="/eLibraryFinal/secured/user/browse" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add User</button>
                 </div>
             </fieldset>
         </form>
