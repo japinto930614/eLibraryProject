@@ -30,7 +30,7 @@ public class User {
     private List<CheckinRecord> checkinRecord;
 
     @ManyToOne()
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "userTypeId", nullable = false)
     @NotNull(message = "* User is required")
     private UserType userType;
 
