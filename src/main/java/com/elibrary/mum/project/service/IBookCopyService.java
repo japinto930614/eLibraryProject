@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface IBookCopyService {
     Book add(BookCopy bookCopy);
     List<BookCopy> getAllBookCopies();
-    Optional<BookCopy> findByBookNumber(int bookCopyNumber);
+    Optional<BookCopy> findByBookCopyNumber(int bookCopyNumber);
 
 }
