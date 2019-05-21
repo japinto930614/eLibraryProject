@@ -4,16 +4,16 @@
 	layout:decorate="~{secured/layouts/master-page-layout}">
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/supplier/supplier.css}" />
-    <title>HighVay - SRM - Add a New Supplier</title>
+    <title>HighVay - SRM - Add a New User</title>
 </head>
 <body onload="document.querySelector('#supplierNumber').focus();">
     <th:block layout:fragment="content">
-        <form id="supplierForm" method="post" action="/srm/secured/supplier/new" th:object="${supplier}">
+        <form id="supplierForm" method="post" action="/new" th:object="${user}">
             <fieldset>
-                <legend>New Supplier Form</legend>
-                <input type="hidden" name="supplierId" th:value="${supplier.supplierId}" />
+                <legend>New User Form</legend>
+                <input type="hidden" name="userId" th:value="${user.userId}" />
                 <div class="form-group" style="margin-top: 1em;">
-                    <label for="supplierNumber">Supplier Number:</label>
+                    <label for="supplierNumber">userNumber Number:</label>
                     <span th:if="${#fields.hasErrors('supplierNumber')}" th:errors="*{supplierNumber}"
 									class="alert alert-danger"></span>
                     <input id="supplierNumber" name="supplierNumber" type="text" class="form-control" value="" th:value="${supplier.supplierNumber}" required autofocus />
@@ -23,7 +23,7 @@
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                                         class="alert alert-danger"></span>
                         <input id="name" name="name" type="text" class="form-control" th:value="${supplier.name}">
-                </div>               
+                </div>
                 <div class="form-group">
                         <label for="contactPhoneNumber">Contact Phone Number:</label>
                         <span th:if="${#fields.hasErrors('contactPhoneNumber')}" th:errors="*{contactPhoneNumber}"
