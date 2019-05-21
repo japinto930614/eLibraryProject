@@ -25,6 +25,7 @@ public class Book {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateAdded;
 
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<BookCopy> bookCopies;
 
     @OneToOne
