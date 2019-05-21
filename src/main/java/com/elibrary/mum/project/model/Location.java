@@ -9,6 +9,7 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int locationId;
 
+    private int locationNumber;
     private int section;
     private int row;
 
@@ -53,7 +54,16 @@ public class Location {
         return book;
     }
 
-    public void setBook(Book book) {
+    public void setBook(Book book)
+    {
         this.book = book;
+    }
+
+    public int getLocationNumber() {
+        return locationNumber;
+    }
+
+    public void setLocationNumber(int locationNumber) {
+        this.locationNumber = locationNumber;
     }
 }
