@@ -3,64 +3,62 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{secured/layouts/master-page-layout}">
 <head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/product/product.css}" />
-    <title>eLibrary - Add a New Product</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/books/books.css}" />
+    <title>eLibrary - Add a New books</title>
 </head>
-<body> <!--onload="document.querySelector('#productNumber').focus();"-->
+<body> <!--onload="document.querySelector('#booksNumber').focus();"-->
     <th:block layout:fragment="content">
-        <form id="productForm" method="post" action="/eLibraryFinal/secured/product/new" th:object="${product}">
+        <form id="booksForm" method="post" action="/eLibraryFinal/secured/book/new" th:object="${book}">
             <fieldset>
-                <legend>New Product Form</legend>
+                <legend>New books Form</legend>
                 <div class="container" style="margin-top: 1em;">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="hidden" name="productId" th:value="${product.productId}" />
+                            <input type="hidden" name="booksId" th:value="${book.booksId}" />
                             <div class="form-group">
-                                <label for="productNumber">Product Number</label>
-                                <small><span th:if="${#fields.hasErrors('productNumber')}" th:errors="*{productNumber}"
+                                <label for="bookNumber">Book Number</label>
+                                <small><span th:if="${#fields.hasErrors('bookNumber')}" th:errors="*{bookNumber}"
                                       class="alert alert-danger"></span></small>
-                                <input id="productNumber" name="productNumber" type="text" class="form-control" th:value="${product.productNumber}" required autofocus="autofocus">
+                                <input id="bookNumber" name="bookNumber" type="text" class="form-control" th:value="${book.bookNumber}" required autofocus="autofocus">
                             </div>
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                <label for="title">Title</label>
+                                <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
                                       class="alert alert-danger"></span>
-                                <input id="name" name="name" type="text" class="form-control" th:value="${product.name}" required="required">
+                                <input id="title" name="title" type="text" class="form-control" th:value="${book.title}" required="required">
                             </div>
                             <div class="form-group">
-                                <label for="unitPrice">Unit Price</label>
-                                <span th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"
+                                <label for="isbn">ISBN</label>
+                                <span th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"
                                       class="alert alert-danger"></span>
-                                <input id="unitPrice" name="unitPrice" type="text" class="form-control" th:value="${product.unitPrice}" required="required">
+                                <input id="isbn" name="isbn" type="text" class="form-control" th:value="${books.isbn}" required="required">
                             </div>
+                            <div class="form-group">
+                                <label for="author">Author</label>
+                                <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"
+                                      class="alert alert-danger"></span>
+                                <input id="author" name="author" type="text" class="form-control" th:value="${book.author}" required="required">
+                            </div>
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="quantityInStock">Quantity in stock</label>
-                                <span th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"
+                                <label for="description">Description</label>
+                                <span th:if="${#fields.hasErrors('author')}" th:errors="*{description}"
                                       class="alert alert-danger"></span>
-                                <input id="quantityInStock" name="quantityInStock" type="text" class="form-control" th:value="${product.quantityInStock}" required="required">
+                                <input id="description" name="description" type="text" class="form-control" th:value="${book.description}" required="required">
                             </div>
                             <div class="form-group">
-                                <label for="supplier">Supplier:</label>
-                                <span th:if="${#fields.hasErrors('supplier')}" th:errors="*{supplier}"
+                                <label for="dateAdded">Date Added</label>
+                                <span th:if="${#fields.hasErrors('dateAdded')}" th:errors="*{dateAdded}"
                                       class="alert alert-danger"></span>
-                                <select name="supplier" id="supplier" class="form-control" required="required">
-                                    <option value="">Select a supplier</option>
-                                    <option th:each="supplier : ${suppliers}" th:value="${supplier.supplierId}" th:text="${supplier.name}"></option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="dateSupplied">Date supplied</label>
-                                <span th:if="${#fields.hasErrors('dateSupplied')}" th:errors="*{dateSupplied}"
-                                      class="alert alert-danger"></span>
-                                <input id="dateSupplied" name="dateSupplied" type="date" class="form-control" aria-describedby="dateSuppliedHelp" th:value="${product.dateSupplied}" required="required">
-                                <small id="dateSuppliedHelp" class="form-text text-muted">Enter a valid Date.</small>
+                                <input id="dateAdded" name="dateAdded" type="date" class="form-control" aria-describedby="dateAddedHelp" th:value="${book.dateAdded}" required="required">
+                                <small id="dateAddedHelp" class="form-text text-muted">Enter a valid Date.</small>
                             </div>
                             <div style="float:right;">
                                 <button id="btnReset" type="reset" class="btn btn-outline-info" style="margin-right: 2em;">Reset</button>
-                                <a href="/eLibraryFinal/secured/product/browse" class="btn btn-outline-warning" style="margin-right: 2em;">Cancel</a>
-                                <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add Product</button>
+                                <a href="/eLibraryFinal/secured/books/browse" class="btn btn-outline-warning" style="margin-right: 2em;">Cancel</a>
+                                <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add books</button>
                             </div>
                         </div>
                     </div>

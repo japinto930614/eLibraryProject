@@ -21,20 +21,22 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value = "/eLibraryFinal/secured/user")
 public class UserController {
-    @Autowired
-     private UserService userService;
-    @Autowired
-     private UserTypeService userTypeService;
+
+//    @Autowired
+//    private ISupplierService supplierService;
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfSuppliers() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("users",  userService.getAllUsers());
+//        List<Supplier> suppliers = supplierService.getAllSuppliers();
+//        modelAndView.addObject("suppliers", suppliers);
         modelAndView.setViewName("secured/user/browse");
         return modelAndView;
     }
 
     @GetMapping(value = "/new")
+    public String newUserForm(Model model) {
+        model.addAttribute("user", new User());
     public String newSupplierForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("userTypes",userTypeService.getAllUserTypes());
@@ -46,11 +48,10 @@ public class UserController {
                                  BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            model.addAttribute("userTypes",userTypeService.getAllUserTypes());
             return "secured/user/new";
         }
-        user = userService.addUser(user);
-        return "redirect:/secured/user/browse";
+//        user = supplierService.addNewSupplier(user);
+        return "redirect:/srm/secured/user/browse";
     }
 
 

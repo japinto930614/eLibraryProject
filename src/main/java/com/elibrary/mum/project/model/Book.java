@@ -16,9 +16,9 @@ public class Book {
     public Long bookId;
     private Long bookNumber;
     private String title;
-    private String ISBN;
-    private String Author;
-    private String Description;
+    private String isbn;
+    private String author;
+    private String description;
 
     @NotNull(message = "* Date supplied is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -81,28 +81,34 @@ public class Book {
         this.title = title;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn()
+    {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String isbn)
+    {
+        this.isbn = isbn;
     }
 
-    public String getAuthor() {
-        return Author;
+    public String getAuthor()
+    {
+        return author;
     }
 
-    public void setAuthor(String author) {
-        Author = author;
+    public void setAuthor(String author)
+    {
+        this.author = author;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getDescription()
+    {
+        return description;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     public Long getBookNumber() {
