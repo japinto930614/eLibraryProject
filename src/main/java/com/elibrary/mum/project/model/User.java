@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class User {
     private Long id;
+    private Long userNumber;
     private String firstName;
     private String lastName;
     private int age;
@@ -65,5 +66,13 @@ public class User {
 
     public void setOverduefine(double overduefine) {
         this.overduefine = overduefine;
+    }
+
+    public Long getUserNumber() {
+        return userNumber;
+    }
+
+    public void setUserNumber(Long userNumber) {
+        this.userNumber = userNumber;
     }
 }
