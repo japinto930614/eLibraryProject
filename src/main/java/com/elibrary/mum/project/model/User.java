@@ -1,12 +1,16 @@
 package com.elibrary.mum.project.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
+@Table(name = "USERS")
 public class User {
-    private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long userId;
     private Long userNumber;
     private String firstName;
     private String lastName;
@@ -18,7 +22,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CheckOutRecord> checkOutRecords;
 
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private CheckinRecord checkinRecord;
 
     public CheckinRecord getCheckinRecord() {
@@ -29,12 +33,12 @@ public class User {
         this.checkinRecord = checkinRecord;
     }
 
-    public Long getId() {
-        return id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCheckOutRecords(List<CheckOutRecord> checkOutRecords) {
+        this.checkOutRecords = checkOutRecords;
     }
 
     public String getFirstName() {
@@ -91,5 +95,13 @@ public class User {
 
     public void setUserNumber(Long userNumber) {
         this.userNumber = userNumber;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public List<CheckOutRecord> getCheckOutRecords() {
+        return checkOutRecords;
     }
 }

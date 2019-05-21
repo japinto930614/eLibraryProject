@@ -19,6 +19,11 @@ public class CheckinRecord {
     @OneToMany(mappedBy = "checkinRecord", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    @NotNull(message = "* User is required")
+    private User user;
+
 
 
     public int getCheckingRecordId() {
