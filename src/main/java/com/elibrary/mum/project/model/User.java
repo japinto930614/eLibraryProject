@@ -1,6 +1,9 @@
 package com.elibrary.mum.project.model;
 
+import org.hibernate.annotations.ManyToAny;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,6 +29,22 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<CheckinRecord> checkinRecord;
 
+    @ManyToOne()
+    @JoinColumn(name = "userId", nullable = false)
+    @NotNull(message = "* User is required")
+    private UserType userType;
+
+    public List<CheckinRecord> getCheckinRecord() {
+        return checkinRecord;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 
     public void setCheckinRecord(List<CheckinRecord> checkinRecord) {
         this.checkinRecord = checkinRecord;
