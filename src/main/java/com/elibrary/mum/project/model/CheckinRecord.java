@@ -12,8 +12,11 @@ public class CheckinRecord {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int checkingRecordId;
 
-    @OneToMany(mappedBy = "checkinRecord", cascade = CascadeType.ALL)
-    private List<BookCopy> bookCopies;
+
+    @ManyToOne()
+    @JoinColumn(name = "bookCopyId", nullable = false)
+    @NotNull(message = "* BookCopy is required is required")
+    private BookCopy bookCopy;
 
 
 
@@ -39,13 +42,11 @@ public class CheckinRecord {
         this.checkingRecordId = checkingRecordId;
     }
 
-    public List<BookCopy> getBookCopies() {
-        return bookCopies;
+    public BookCopy getBookCopy() {
+        return bookCopy;
     }
 
-    public void setBookCopies(List<BookCopy> bookCopies) {
-        this.bookCopies = bookCopies;
+    public void setBookCopy(BookCopy bookCopy) {
+        this.bookCopy = bookCopy;
     }
-
-
 }
