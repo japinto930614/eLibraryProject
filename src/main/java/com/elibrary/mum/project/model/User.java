@@ -1,13 +1,10 @@
 package com.elibrary.mum.project.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
-@Entity
-@Table(name = "USERS")
+
 public class User {
     private Long id;
     private Long userNumber;
