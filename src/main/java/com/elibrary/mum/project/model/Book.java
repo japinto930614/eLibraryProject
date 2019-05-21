@@ -4,7 +4,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.stream.Location;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.LongBinaryOperator;
 
 @Entity
@@ -20,6 +22,25 @@ public class Book {
     @NotNull(message = "* Date supplied is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateAdd;
+    private List<Book> listBooks;
+    @OneToOne
+    private Location location;
+
+    public List<Book> getListBooks() {
+        return listBooks;
+    }
+
+    public void setListBooks(List<Book> listBooks) {
+        this.listBooks = listBooks;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public Book() {
     }
