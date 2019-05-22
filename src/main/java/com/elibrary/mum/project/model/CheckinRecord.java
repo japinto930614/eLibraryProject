@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "CheckingRecords")
 public class CheckinRecord {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long checkingRecordId;
 
 

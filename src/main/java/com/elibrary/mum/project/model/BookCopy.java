@@ -10,7 +10,7 @@ import java.util.List;
 public class BookCopy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bookCopyId;
     private int bookCopyNumber;
 
@@ -22,12 +22,23 @@ public class BookCopy {
     @OneToMany(mappedBy = "bookCopy", cascade = CascadeType.ALL)
     private List<CheckinRecord> checkinRecords = new ArrayList<>();
 
+    @OneToMany(mappedBy = "bookCopy", cascade = CascadeType.ALL)
+    private List<CheckOutRecord> checkOutRecords = new ArrayList<>();
+
     public int getBookCopyId() {
         return bookCopyId;
     }
 
     public void setBookCopyId(int bookCopyId) {
         this.bookCopyId = bookCopyId;
+    }
+
+    public List<CheckOutRecord> getCheckOutRecords() {
+        return checkOutRecords;
+    }
+
+    public void setCheckOutRecords(List<CheckOutRecord> checkOutRecords) {
+        this.checkOutRecords = checkOutRecords;
     }
 
     public int getBookCopyNumber() {

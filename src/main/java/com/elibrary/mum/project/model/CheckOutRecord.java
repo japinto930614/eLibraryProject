@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class CheckOutRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long checkOutRecordId;
     @NotNull(message = "* Date supplied is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

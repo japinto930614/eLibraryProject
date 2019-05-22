@@ -2,11 +2,7 @@ package com.elibrary.mum.project.controller.viewctrl;
 
 
 import com.elibrary.mum.project.model.Book;
-import com.elibrary.mum.project.model.User;
-import com.elibrary.mum.project.model.UserType;
 import com.elibrary.mum.project.service.IBookService;
-import com.elibrary.mum.project.service.IUserService;
-import com.elibrary.mum.project.service.IUserTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +19,8 @@ public class BookController {
 
     @Autowired
     private IBookService bookService;
+
+
 
 
     @GetMapping(value = "/browse")
@@ -45,7 +43,7 @@ public class BookController {
 //
 //        return "secured/user/new";
 //    }
-    @RequestMapping(value="/new", method = RequestMethod.GET)
+    @GetMapping(value="/new")
     public String BookAdditionForm(Model model){
         model.addAttribute("book", new Book());
         return "secured/book/new";
@@ -63,7 +61,7 @@ public class BookController {
 //        user = userService.addUser(user);
 //        return "redirect:/eLibraryFinal/secured/user/browse";
 //    }
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @PostMapping(value = "/new")
     public String addNewBook(@Valid @ModelAttribute("book") Book book,
                                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -98,6 +96,15 @@ public class BookController {
     public String delete(@PathVariable Long id, Model model){
         bookService.removeBook(id);
         return "redirect:/eLibraryFinal/secured/book/browse";
+    }
+    @GetMapping(value = "/browseoverdue")
+    public ModelAndView displayListOOverduefBooks() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Book> books = bookService.getListOfBook();
+
+        modelAndView.addObject("books", books);
+        modelAndView.setViewName("secured/book/browseoverdue");
+        return modelAndView;
     }
 
 
