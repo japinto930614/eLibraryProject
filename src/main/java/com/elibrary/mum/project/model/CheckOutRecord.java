@@ -13,12 +13,12 @@ public class CheckOutRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long checkOutRecordId;
-    @NotNull(message = "* Date supplied is required")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate overdureDate;
-    @NotNull(message = "* Date supplied is required")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate checkOutDate;
+//    @NotNull(message = "* Date supplied is required")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkOutDate = LocalDate.now();
+//    @NotNull(message = "* Date supplied is required")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate overdueDate = checkOutDate.plusDays(15);
 
     @ManyToOne
     @JoinColumn(name = "userId", nullable = false)
@@ -32,6 +32,11 @@ public class CheckOutRecord {
     public CheckOutRecord() {
     }
 
+    public CheckOutRecord(User user, BookCopy bookCopy) {
+        this.user = user;
+        this.bookCopy = bookCopy;
+    }
+
     public Long getCheckOutRecordId() {
         return checkOutRecordId;
     }
@@ -40,12 +45,12 @@ public class CheckOutRecord {
         this.checkOutRecordId = checkOutRecordId;
     }
 
-    public LocalDate getOverdureDate() {
-        return overdureDate;
+    public LocalDate getOverdueDate() {
+        return overdueDate;
     }
 
-    public void setOverdureDate(LocalDate overdureDate) {
-        this.overdureDate = overdureDate;
+    public void setOverdueDate(LocalDate overdueDate) {
+        this.overdueDate = overdueDate;
     }
 
     public LocalDate getCheckOutDate() {

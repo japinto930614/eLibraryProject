@@ -23,7 +23,7 @@ public class BookCopyService implements IBookCopyService {
 
     @Override
     public List<BookCopy> getAllBookCopies() {
-        return iBookCopyRepository.findAll(Sort.by("title"));
+        return iBookCopyRepository.findAll(Sort.by("bookCopyNumber"));
     }
 
     @Override
