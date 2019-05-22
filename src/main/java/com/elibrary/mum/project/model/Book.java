@@ -19,6 +19,7 @@ public class Book {
     private String isbn;
     private String author;
     private String description;
+    private int numOfCopies;
 
 //    @NotNull(message = "* Date supplied is required")
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -126,5 +127,13 @@ public class Book {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public int getNumOfCopies() {
+        return numOfCopies;
+    }
+
+    public void setNumOfCopies(int numOfCopies) {
+        this.numOfCopies = numOfCopies;
     }
 }

@@ -26,6 +26,9 @@ public class BookController {
     @Autowired
     private IPositionService positionService;
 
+    @Autowired
+    private IBookCopyService bookCopyService;
+
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfBooks() {
@@ -66,6 +69,11 @@ public class BookController {
             return "secured/book/new";
         }
         book = bookService.addBook(book);
+        for(long i = 1; i<= book.getNumOfCopies(); i++){
+            Long bookCopyNumber =  (book.getBookNumber() * 10) + i;
+            BookCopy bookCopy = new BookCopy(bookCopyNumber, book);
+            bookCopyService.add(bookCopy);
+        }
         return "redirect:/eLibraryFinal/secured/book/browse";
     }
 
