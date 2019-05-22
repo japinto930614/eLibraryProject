@@ -103,5 +103,13 @@ public class UserController {
         return "redirect:/eLibraryFinal/secured/user/browse";
     }
 
+    @RequestMapping(value="/payoverdue/{id}", method = RequestMethod.GET)
+    public String payOverDue(@PathVariable Long id, Model model){
+        User user = userService.findByUserNumber(id);
+        user.setOverduefine(0.0);
+        userService.addUser(user);
+        return "redirect:/eLibraryFinal/secured/user/browse";
+    }
+
 
 }

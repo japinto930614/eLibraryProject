@@ -29,6 +29,7 @@
                     <th scope="col">Overdue Fine</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +50,7 @@
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.registrationDate}"></td>
                     <td th:text="${user.overduefine}"></td>
+                    <td><a th:href="@{'/eLibraryFinal/secured/user/payoverdue/' + ${user.userId}}">Pay Overdue Fine</a></td>
                     <td>
                         <a th:href="@{'/eLibraryFinal/secured/user/edit/' + ${user.userId}}">Edit</a>&nbsp;
 
