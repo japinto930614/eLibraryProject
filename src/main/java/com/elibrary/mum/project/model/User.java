@@ -19,8 +19,9 @@ public class User {
     private String lastName;
     private int age;
     private String email;
-    private LocalDate registrationDate;
-    private double overduefine;
+    private LocalDate registrationDate = LocalDate.now();
+
+    private double overduefine = 0.0;
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

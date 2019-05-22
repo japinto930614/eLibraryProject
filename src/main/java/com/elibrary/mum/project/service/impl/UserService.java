@@ -26,13 +26,15 @@ public class UserService implements IUserService {
         return userRepository.findAll(Sort.by("firstName"));
     }
 
-    @Override
-    public Optional<User> findByUserNumber(Long userNumber) {
-        return userRepository.findById(userNumber);
-    }
 
     @Override
-    public void delete(User user) {
-        userRepository.delete(user);
+    public Optional<User> findByUserNumber(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 }
