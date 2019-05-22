@@ -113,24 +113,7 @@ public class BookController {
         return modelAndView;
     }
 
-//    @RequestMapping(value = "/browse{id}", method = RequestMethod.POST)
-//    public String searchBook(@ModelAttribute Book book, BindingResult result){
-//        Book bookResult = new Book();
-//        Book searchedBook = bookService.findOneBook(book.getBookId());
-//        bookResult = searchedBook != null ? searchedBook : new Book();
-//        return "redirect:/eLibraryFinal/secured/book/browse";
-//
-//    }
 
-//    @RequestMapping(value = "/search", method = RequestMethod.GET)
-//    public String search(@RequestParam(value = "search", required = false) String q, Model model) {
-//        List<Book> books = bookService.getListOfBook().stream()
-//                .filter(x -> x.getTitle().equals(q))
-//                .collect(Collectors.toList());
-//        model.addObject("books", books);
-//        return "secured/book/browse";
-//
-//    }
 
     @GetMapping(value = "/search")
     public ModelAndView displayListSearchedBooks(@RequestParam(value = "search", required = false) String q, Model model) {
@@ -143,15 +126,7 @@ public class BookController {
         return modelAndView;
     }
 
-//    @GetMapping("/search")
-//    public String getProduct(Model model,
-//                             @ModelAttribute("book") Book book,
-//                             BindingResult result) {
-//        List<Book> books = bookService.getListOfBook().stream()
-//                .filter(x -> x.getTitle().equals(book.getTitle()))
-//                .collect(Collectors.toList());
-//        model.addAttribute("books", books);
-//        return "redirect:/eLibraryFinal/secured/book/browse";
-//    }
+
+
 
 }
