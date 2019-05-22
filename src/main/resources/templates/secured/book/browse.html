@@ -18,9 +18,9 @@
 
     </div>
     <div class="search-container">
-        <form action="/action_page.php">
+        <form action="/action_p">
             <input style="padding-left:16px" type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="btn-btn-success">Search</i></button>
+            <button type="submit"><i class="btn-btn-success"><a th:href="@{'/eLibraryFinal/secured/user/search/' + ${book.bookId}}">Search</a></i></button>
         </form>
     </div>
     <p>&nbsp;</p>

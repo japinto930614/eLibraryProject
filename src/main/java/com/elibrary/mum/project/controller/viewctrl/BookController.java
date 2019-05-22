@@ -103,6 +103,13 @@ public class BookController {
         modelAndView.setViewName("secured/book/browseoverdue");
         return modelAndView;
     }
+    @RequestMapping(value = "/browse{id}", method = RequestMethod.POST)
+    public String searchBook(@ModelAttribute Book book, BindingResult result){
+        Book bookResult = new Book();
+        Book searchedBook = bookService.findOneBook(book.getBookId());
+        bookResult = searchedBook != null ? searchedBook : new Book();
+        return "redirect:/eLibraryFinal/secured/book/browse";
 
+    }
 
 }
