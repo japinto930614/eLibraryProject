@@ -28,8 +28,8 @@ public class UserService implements IUserService {
 
 
     @Override
-    public Optional<User> findByUserNumber(Long userId) {
-        return userRepository.findById(userId);
+    public User findByUserNumber(Long userId) {
+        return userRepository.findById(userId).orElse(null);
     }
 
 

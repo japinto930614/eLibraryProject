@@ -4,7 +4,7 @@
 	layout:decorate="~{secured/layouts/master-page-layout}">
 <head>
     <link rel="stylesheet" type="text/css" th:href="@{/css/user/user.css}" />
-    <title>eLibrary - Add a New User</title>
+    <title>eLibrary - Edit User</title>
 </head>
 <body onload="document.querySelector('#userNumber').focus();">
     <th:block layout:fragment="content">
@@ -58,7 +58,7 @@
 
                 <div style="float:right;">
                     <a href="/eLibraryFinal/secured/user/browse" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
-                    <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Add User</button>
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Edit User</button>
                 </div>
             </fieldset>
         </form>

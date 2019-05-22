@@ -62,25 +62,40 @@ public class UserController {
         return "redirect:/eLibraryFinal/secured/user/browse";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String edit(@Valid @ModelAttribute("edit") User user,
+    @GetMapping(value = "/edit/{id}")
+//    @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
+    public String editUserForm(@PathVariable Long id, Model model){
+//    public String editUserForm( Model model){
+
+        List<UserType> userTypes = userTypeService.getAllUserTypes();
+
+//        model.addAttribute("user", new User());
+
+        model.addAttribute("user", userService.findByUserNumber(id));
+
+        model.addAttribute("userTypes", userTypes);
+
+        return "secured/user/edit";
+    }
+
+    @PostMapping(value = "/edit")
+//    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("user") User user,
                        BindingResult result, Model model)  {
 
         if (result.hasErrors()) {
+            List<UserType> userTypes = userTypeService.getAllUserTypes();
+            model.addAttribute("userTypes", userTypes);
             model.addAttribute("errors", result.getAllErrors());
-            return "user/edit";
+            return "secured/user/edit";
         }
 
         user = userService.addUser(user);
-        return "redirect:/users";
+        return "redirect:/eLibraryFinal/secured/user/edit";
 
     }
 
-    @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
-    public String view(@PathVariable Long id, Model model){
-        model.addAttribute("user", userService.findByUserNumber(id));
-        return "user/edit";
-    }
+
 
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable Long id, Model model){
