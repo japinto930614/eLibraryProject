@@ -33,7 +33,7 @@
             <th scope="col">ISBN</th>
             <th scope="col">Author</th>
             <th scope="col">Description</th>
-<!--            <th scope="col">Position</th>-->
+            <th scope="col">Position</th>
             <th scope="col">date Added</th>
         </tr>
         </thead>
@@ -52,7 +52,7 @@
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.author}"></td>
             <td th:text="${book.description}"></td>
-<!--            <td th:text="${book.position}"></td>-->
+            <td th:text="${book.position.section + ', ' + book.position.line} "></td>
             <td th:text="${book.dateAdded}"></td>
         </tr>
         </tbody>
