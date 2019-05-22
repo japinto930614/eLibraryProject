@@ -25,8 +25,9 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void removeBook(Book book) {
-        bookRepository.delete(book);
+    public void removeBook(Long id)
+    {
+        bookRepository.deleteById(id);
     }
 
     @Override
