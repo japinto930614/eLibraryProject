@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/eLibraryFinal/secured/book")
@@ -111,12 +112,46 @@ public class BookController {
         modelAndView.setViewName("secured/book/browseoverdue");
         return modelAndView;
     }
-//    @RequestMapping(value = "/search{id}", method = RequestMethod.POST)
-//    public String search(@PathVariable Long id, Model model){
-//        model.addAttribute("book", bookService.findOneBook(id));
-//        return "secured/book/browse";
+
+//    @RequestMapping(value = "/browse{id}", method = RequestMethod.POST)
+//    public String searchBook(@ModelAttribute Book book, BindingResult result){
+//        Book bookResult = new Book();
+//        Book searchedBook = bookService.findOneBook(book.getBookId());
+//        bookResult = searchedBook != null ? searchedBook : new Book();
+//        return "redirect:/eLibraryFinal/secured/book/browse";
+//
 //    }
 
+//    @RequestMapping(value = "/search", method = RequestMethod.GET)
+//    public String search(@RequestParam(value = "search", required = false) String q, Model model) {
+//        List<Book> books = bookService.getListOfBook().stream()
+//                .filter(x -> x.getTitle().equals(q))
+//                .collect(Collectors.toList());
+//        model.addObject("books", books);
+//        return "secured/book/browse";
+//
+//    }
+
+    @GetMapping(value = "/search")
+    public ModelAndView displayListSearchedBooks(@RequestParam(value = "search", required = false) String q, Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Book> books = bookService.getListOfBook().stream()
+                .filter(x -> x.getTitle().equals(q))
+                .collect(Collectors.toList());
+        modelAndView.addObject("books", books);
+        modelAndView.setViewName("secured/book/browse");
+        return modelAndView;
     }
 
+//    @GetMapping("/search")
+//    public String getProduct(Model model,
+//                             @ModelAttribute("book") Book book,
+//                             BindingResult result) {
+//        List<Book> books = bookService.getListOfBook().stream()
+//                .filter(x -> x.getTitle().equals(book.getTitle()))
+//                .collect(Collectors.toList());
+//        model.addAttribute("books", books);
+//        return "redirect:/eLibraryFinal/secured/book/browse";
+//    }
 
+}
