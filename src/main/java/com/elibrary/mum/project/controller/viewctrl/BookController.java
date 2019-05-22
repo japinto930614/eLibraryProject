@@ -2,13 +2,16 @@ package com.elibrary.mum.project.controller.viewctrl;
 
 
 import com.elibrary.mum.project.model.Book;
+import com.elibrary.mum.project.model.User;
+import com.elibrary.mum.project.model.UserType;
+import com.elibrary.mum.project.service.IBookService;
+import com.elibrary.mum.project.service.IUserService;
+import com.elibrary.mum.project.service.IUserTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -18,51 +21,84 @@ import java.util.List;
 @RequestMapping(value = "/eLibraryFinal/secured/book")
 public class BookController {
 
-   /* @Autowired
-    private IProductService productService;
-
     @Autowired
-    private ISupplierService supplierService;*/
+    private IBookService bookService;
+
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfBooks() {
         ModelAndView modelAndView = new ModelAndView();
-//        List<Product> products = productService.getAllProducts();
-//        modelAndView.addObject("products", products);
+        List<Book> books = bookService.getListOfBook();
+        modelAndView.addObject("books", books);
         modelAndView.setViewName("secured/book/browse");
         return modelAndView;
     }
 
-    @GetMapping(value = "/browseoverdue")
-    public ModelAndView displayListOfOverdues() {
-        ModelAndView modelAndView = new ModelAndView();
-//        List<Product> products = productService.getAllProducts();
-//        modelAndView.addObject("products", products);
-        modelAndView.setViewName("secured/book/browseoverdue");
-        return modelAndView;
+//    @GetMapping(value = "/new")
+//    public String newBookForm(Model model) {
+//
+//        List<UserType> userTypes = userTypeService.getAllUserTypes();
+//
+//        model.addAttribute("user", new User());
+//
+//        model.addAttribute("userTypes", userTypes);
+//
+//        return "secured/user/new";
+//    }
+    @RequestMapping(value="/new", method = RequestMethod.GET)
+    public String BookAdditionForm(Model model){
+        model.addAttribute("book", new Book());
+        return "secured/book/new";
     }
 
-    @GetMapping(value = "/new")
-//    public ModelAndView newProductForm(Model model) {
-    public String newProductForm(Model model) {
-
-//        List<Supplier> suppliers = supplierService.getAllSuppliers();
-//        model.addAttribute("product", new Product());
-//        model.addAttribute("suppliers", suppliers);
-        return "secured/product/new";
-    }
-
-    @PostMapping(value = "/new")
-    public String addNewProduct(@Valid @ModelAttribute("book") Book book,
-                                BindingResult bindingResult, Model model) {
+//    @PostMapping(value = "/new")
+//    public String addNewBook(@Valid @ModelAttribute("book") Book book,
+//                             BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("errors", bindingResult.getAllErrors());
+//            List<UserType> userTypes = userTypeService.getAllUserTypes();
+//            model.addAttribute("userTypes", userTypes);
+//            return "secured/user/new";
+//        }
+//        user = userService.addUser(user);
+//        return "redirect:/eLibraryFinal/secured/user/browse";
+//    }
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String addNewBook(@Valid @ModelAttribute("book") Book book,
+                                     BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-//            List<Supplier> suppliers = supplierService.getAllSuppliers();
-//            model.addAttribute("suppliers", suppliers);
-            return "secured/product/new";
+            return "secured/book/new";
         }
-//        product = productService.addNewProduct(product);
-        return "redirect:/srm/secured/product/browse";
+        book = bookService.addBook(book);
+        return "redirect:/eLibraryFinal/secured/book/browse";
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(@Valid @ModelAttribute("edit") Book book,
+                       BindingResult result, Model model)  {
+
+        if (result.hasErrors()) {
+            model.addAttribute("errors", result.getAllErrors());
+            return "secured/book/edit";
+        }
+
+        book = bookService.addBook(book);
+        return "redirect:/eLibraryFinal/secured/book/browse";
+
+    }
+
+    @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
+    public String view(@PathVariable Long id, Model model){
+        model.addAttribute("book", bookService.findOneBook(id));
+        return "secured/book/edit";
+    }
+
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+    public String delete(@PathVariable Long id, Model model){
+        bookService.removeBook(id);
+        return "redirect:/eLibraryFinal/secured/book/browse";
+    }
+
 
 }

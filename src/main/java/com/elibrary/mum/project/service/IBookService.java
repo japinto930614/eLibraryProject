@@ -7,7 +7,7 @@ import java.util.List;
 public interface IBookService {
      Book addBook(Book book);
      List<Book> getListOfBook();
-     void removeBook(Book book);
+     void removeBook(Long id);
      Book findOneBook(Long id);
 
 
