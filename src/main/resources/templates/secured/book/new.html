@@ -66,6 +66,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="numOfCopies">Number of copies</label>
+                                <span th:if="${#fields.hasErrors('numOfCopies')}" th:errors="*{numOfCopies}"
+                                      class="alert alert-danger"></span>
+                                <input id="numOfCopies" name="numOfCopies" type="text" class="form-control" th:value="${book.numOfCopies}" required="required">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="position">Position:</label>
                                 <span th:if="${#fields.hasErrors('position')}" th:errors="*{position}"
                                       class="alert alert-danger"></span>

@@ -11,8 +11,8 @@ public class BookCopy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bookCopyId;
-    private int bookCopyNumber;
+    private Long bookCopyId;
+    private Long bookCopyNumber;
 
     @ManyToOne()
     @JoinColumn(name = "bookId", nullable = false)
@@ -25,11 +25,18 @@ public class BookCopy {
     @OneToMany(mappedBy = "bookCopy", cascade = CascadeType.ALL)
     private List<CheckOutRecord> checkOutRecords = new ArrayList<>();
 
-    public int getBookCopyId() {
+    public BookCopy(){};
+
+    public BookCopy(Long bookCopyNumber, Book book) {
+        this.bookCopyNumber = bookCopyNumber;
+        this.book = book;
+    }
+
+    public Long getBookCopyId() {
         return bookCopyId;
     }
 
-    public void setBookCopyId(int bookCopyId) {
+    public void setBookCopyId(Long bookCopyId) {
         this.bookCopyId = bookCopyId;
     }
 
@@ -41,11 +48,11 @@ public class BookCopy {
         this.checkOutRecords = checkOutRecords;
     }
 
-    public int getBookCopyNumber() {
+    public Long getBookCopyNumber() {
         return bookCopyNumber;
     }
 
-    public void setBookCopyNumber(int bookCopyNumber) {
+    public void setBookCopyNumber(Long bookCopyNumber) {
         this.bookCopyNumber = bookCopyNumber;
     }
 
