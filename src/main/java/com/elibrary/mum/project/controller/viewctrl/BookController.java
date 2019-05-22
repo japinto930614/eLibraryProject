@@ -1,12 +1,8 @@
 package com.elibrary.mum.project.controller.viewctrl;
 
 
-import com.elibrary.mum.project.model.Book;
-import com.elibrary.mum.project.model.User;
-import com.elibrary.mum.project.model.UserType;
-import com.elibrary.mum.project.service.IBookService;
-import com.elibrary.mum.project.service.IUserService;
-import com.elibrary.mum.project.service.IUserTypeService;
+import com.elibrary.mum.project.model.*;
+import com.elibrary.mum.project.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +20,12 @@ public class BookController {
     @Autowired
     private IBookService bookService;
 
+    @Autowired
+    private ICategoryService categoryService;
+
+    @Autowired
+    private IPositionService positionService;
+
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfBooks() {
@@ -34,45 +36,41 @@ public class BookController {
         return modelAndView;
     }
 
-//    @GetMapping(value = "/new")
-//    public String newBookForm(Model model) {
-//
-//        List<UserType> userTypes = userTypeService.getAllUserTypes();
-//
-//        model.addAttribute("user", new User());
-//
-//        model.addAttribute("userTypes", userTypes);
-//
-//        return "secured/user/new";
-//    }
-    @RequestMapping(value="/new", method = RequestMethod.GET)
-    public String BookAdditionForm(Model model){
+    @GetMapping(value = "/new")
+    public String newBookForm(Model model) {
+
+        List<Category> categories = categoryService.getAllCategories();
+
+        List<Position> positions = positionService.getAllPositions();
+
         model.addAttribute("book", new Book());
+
+        model.addAttribute("categories", categories);
+
+        model.addAttribute("positions", positions);
+
         return "secured/book/new";
     }
 
-//    @PostMapping(value = "/new")
-//    public String addNewBook(@Valid @ModelAttribute("book") Book book,
-//                             BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("errors", bindingResult.getAllErrors());
-//            List<UserType> userTypes = userTypeService.getAllUserTypes();
-//            model.addAttribute("userTypes", userTypes);
-//            return "secured/user/new";
-//        }
-//        user = userService.addUser(user);
-//        return "redirect:/eLibraryFinal/secured/user/browse";
-//    }
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @PostMapping(value = "/new")
     public String addNewBook(@Valid @ModelAttribute("book") Book book,
-                                     BindingResult bindingResult, Model model) {
+                             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
+            List<Category> categories = categoryService.getAllCategories();
+
+            List<Position> positions = positionService.getAllPositions();
+            model.addAttribute("categories", categories);
+
+            model.addAttribute("positions", positions);
             return "secured/book/new";
         }
         book = bookService.addBook(book);
         return "redirect:/eLibraryFinal/secured/book/browse";
     }
+
+
+
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String edit(@Valid @ModelAttribute("edit") Book book,

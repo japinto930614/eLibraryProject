@@ -20,9 +20,9 @@ public class Book {
     private String author;
     private String description;
 
-    @NotNull(message = "* Date supplied is required")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate dateAdded;
+//    @NotNull(message = "* Date supplied is required")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateAdded = LocalDate.now();
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<BookCopy> bookCopies;
@@ -31,6 +31,11 @@ public class Book {
     @JoinColumn(name = "positionId", nullable = false)
     @NotNull(message = "* Position is required")
     private Position position;
+
+    @ManyToOne()
+    @JoinColumn(name = "categoryId", nullable = false)
+    @NotNull(message = "* Category is required")
+    private Category category;
 
     public void setBookNumber(Long bookNumber) {
         this.bookNumber = bookNumber;
@@ -113,5 +118,13 @@ public class Book {
 
     public Long getBookNumber() {
         return bookNumber;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

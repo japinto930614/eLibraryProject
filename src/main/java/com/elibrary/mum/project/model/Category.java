@@ -1,28 +1,22 @@
 package com.elibrary.mum.project.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "CATEGORY")
+@Table(name = "CATEGORIES")
 public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int categoryId;
     private String categoryName;
-    private int categoryNumber;
 
-    public int getCategoryNumber() {
-        return categoryNumber;
-    }
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Book> books = new ArrayList<Book>();
 
-    public void setCategoryNumber(int categoryNumber) {
-        this.categoryNumber = categoryNumber;
-    }
-
-    public Category(){
-
-    }
+    public Category(){ }
     public Category(String categoryName){
      this.categoryName = categoryName;
     }
@@ -41,5 +35,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }
