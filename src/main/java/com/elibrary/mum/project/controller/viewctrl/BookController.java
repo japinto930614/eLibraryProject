@@ -119,7 +119,7 @@ public class BookController {
     public ModelAndView displayListSearchedBooks(@RequestParam(value = "search", required = false) String q, Model model) {
         ModelAndView modelAndView = new ModelAndView();
         List<Book> books = bookService.getListOfBook().stream()
-                .filter(x -> x.getTitle().equals(q))
+                .filter(x -> x.getTitle().equalsIgnoreCase(q))
                 .collect(Collectors.toList());
         modelAndView.addObject("books", books);
         modelAndView.setViewName("secured/book/browse");
