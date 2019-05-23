@@ -74,16 +74,19 @@ public class BookCopyController {
     public String checkOut(@RequestParam(value = "usernumber", required = false) String usernumber,
                            @RequestParam(value = "bookCopyNumber", required = false)String bookCopyNumber, Model model){
 
+        if(!usernumber.equals("")) {
 
-        List<User> users = getUsersByUserNumber(usernumber);
+            List<User> users = getUsersByUserNumber(usernumber);
 
-        List<BookCopy> bookCopies = getBookCopiesByBookCopyNumber(bookCopyNumber);
+            List<BookCopy> bookCopies = getBookCopiesByBookCopyNumber(bookCopyNumber);
 
-        BookCopy bookCopy = bookCopies.get(0);
-        if(!users.isEmpty()) {
-            User user = users.get(0);
-            CheckOutRecord checkOutRecord = new CheckOutRecord(user, bookCopy);
-            checkOutRecordService.addCheckOutRecord(checkOutRecord);
+            BookCopy bookCopy = bookCopies.get(0);
+            if (!users.isEmpty()) {
+                User user = users.get(0);
+                CheckOutRecord checkOutRecord = new CheckOutRecord(user, bookCopy);
+                checkOutRecordService.addCheckOutRecord(checkOutRecord);
+            }
+
         }
 
         return "redirect:/eLibraryFinal/secured/bookcopy/browse";
@@ -94,18 +97,20 @@ public class BookCopyController {
     public String checkIn(@RequestParam(value = "usernumber", required = false) String usernumber,
                            @RequestParam(value = "bookCopyNumber", required = false)String bookCopyNumber, Model model){
 
+        if(!usernumber.equals("")) {
 
-        List<User> users = getUsersByUserNumber(usernumber);
+            List<User> users = getUsersByUserNumber(usernumber);
 
-        List<BookCopy> bookCopies = getBookCopiesByBookCopyNumber(bookCopyNumber);
+            List<BookCopy> bookCopies = getBookCopiesByBookCopyNumber(bookCopyNumber);
 
-        BookCopy bookCopy = bookCopies.get(0);
-        if(!users.isEmpty()) {
-            User user = users.get(0);
-            CheckinRecord checkinrecord = new CheckinRecord( bookCopy, user);
-            checkinRecordService.addCheckinRecord(checkinrecord);
+            BookCopy bookCopy = bookCopies.get(0);
+            if (!users.isEmpty()) {
+                User user = users.get(0);
+                CheckinRecord checkinrecord = new CheckinRecord(bookCopy, user);
+                checkinRecordService.addCheckinRecord(checkinrecord);
+            }
+
         }
-
         return "redirect:/eLibraryFinal/secured/bookcopy/browse";
     }
 

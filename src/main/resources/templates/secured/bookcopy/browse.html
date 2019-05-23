@@ -47,8 +47,8 @@
             <td th:text="${bookCopy.bookCopyNumber}"></td>
             <td th:text="${bookCopy.book.title}"></td>
             <td><form action="#" data-th-action="@{/eLibraryFinal/secured/bookcopy/check}" data-th-object="${model}" method="post">
-                <input name="usernumber"id="usernumber">
-                <input name="bookCopyNumber"id="bookCopyNumber" hidden="true" th:value="${bookCopy.bookCopyNumber}">
+                <input name="usernumber"id="usernumber" type="number" >
+                <input  name="bookCopyNumber"id="bookCopyNumber" hidden="true" th:value="${bookCopy.bookCopyNumber}">
                 <button type="submit" name="action" value="in">Check in</button>
                 <button type="submit" name="action" value="out">Check out</button>
             </form>
