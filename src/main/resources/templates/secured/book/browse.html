@@ -9,7 +9,8 @@
 <body>
 <th:block layout:fragment="content">
     <div>
-        <span style="font-size: 1.5em">List of Books in stock</span>
+        <span style="font-size: 1.5em;color: skyblue">List of Books</span>
+        <hr>
 <!--        <form action="/action_page.php">-->
 <!--            <input type="text" name="fname">-->
 <!--            <input type="submit" value="Search">-->
@@ -17,11 +18,13 @@
 
 
     </div>
+    <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/eLibraryFinal/secured/book/new">Add a Book</a>
+    </span>
     <div class="search-container">
         <form action="#" th:action="@{/eLibraryFinal/secured/book/search}" th:object="${search}">
-            Search:
             <input name="search"id="search">
-            <input type="submit" value="Search">
+            <input type="submit" value="Search" style="background-color: snow;box-decoration-break: inherit; width: fit-content; font: italic">
         </form>
     </div>
     <p>&nbsp;</p>
@@ -59,9 +62,7 @@
         </tbody>
     </table>
 
-    <span style="float:right;">
-                <a class="btn btn-outline-success btn-lg" href="/eLibraryFinal/secured/book/new">Add a Book</a>
-    </span>
+
 </th:block>
 
 <th:block layout:fragment="footer"></th:block>
