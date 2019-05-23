@@ -20,7 +20,7 @@
     <div class="search-container">
         <form action="#" th:action="@{/eLibraryFinal/secured/bookcopy/search}" th:object="${search}">
             Search:
-            <input name="search"id="search">
+            <input name="search"id="search" type="number">
             <input type="submit" value="Search">
         </form>
     </div>
@@ -65,9 +65,9 @@
         </tbody>
     </table>
 
-    <span style="float:right;">
-                <a class="btn btn-outline-success btn-lg" href="/eLibraryFinal/secured/book/new">Add a Book</a>
-    </span>
+<!--    <span style="float:right;">-->
+<!--                <a class="btn btn-outline-success btn-lg" href="/eLibraryFinal/secured/book/new">Add a Book</a>-->
+<!--    </span>-->
 </th:block>
 
 <th:block layout:fragment="footer"></th:block>

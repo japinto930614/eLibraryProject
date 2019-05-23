@@ -2,10 +2,12 @@ package com.elibrary.mum.project.controller.viewctrl;
 
 
 
-import com.elibrary.mum.project.model.User;
-import com.elibrary.mum.project.model.UserType;
+import com.elibrary.mum.project.model.*;
+import com.elibrary.mum.project.service.ICheckOutRecordService;
+import com.elibrary.mum.project.service.ICheckinRecordService;
 import com.elibrary.mum.project.service.IUserService;
 import com.elibrary.mum.project.service.IUserTypeService;
+import com.elibrary.mum.project.service.impl.BookCopyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -26,12 +31,27 @@ public class UserController {
     private IUserService userService;
 
     @Autowired
+    private ICheckinRecordService checkinRecordService;
+
+    @Autowired
+    private ICheckOutRecordService checkOutRecordService;
+
+    @Autowired
+    private BookCopyService bookCopyService;
+
+
+    @Autowired
     private IUserTypeService userTypeService;
 
     @GetMapping(value = "/browse")
     public ModelAndView displayListOfUsers() {
         ModelAndView modelAndView = new ModelAndView();
+
+        generateOverdueFines();
         List<User> users = userService.getAllUsers();
+
+
+
         modelAndView.addObject("users", users);
         modelAndView.setViewName("secured/user/browse");
         return modelAndView;
@@ -109,6 +129,39 @@ public class UserController {
         user.setOverduefine(0.0);
         userService.addUser(user);
         return "redirect:/eLibraryFinal/secured/user/browse";
+    }
+
+
+    public void generateOverdueFines(){
+
+
+        List<BookCopy> overdues = bookCopyService.getOverdueCopies();
+
+        for(BookCopy bookCopy : overdues){
+            int size = bookCopy.getCheckOutRecords().size();
+            CheckOutRecord checkOutRecord = bookCopy.getCheckOutRecords().get(size - 1);
+            User user = checkOutRecord.getUser();
+            LocalDate lastOverdueGenerated = user.getLastOverdueGenerated();
+            double overdueFine = 0;
+            if(lastOverdueGenerated == null) {
+                double days = ChronoUnit.DAYS.between(checkOutRecord.getOverdueDate(), LocalDate.now());
+                overdueFine = days * 2;
+                lastOverdueGenerated = LocalDate.now();
+                user.setLastOverdueGenerated(lastOverdueGenerated);
+                user.setOverduefine(user.getOverduefine() + overdueFine);
+                userService.addUser(user);
+            } else {
+                double days = ChronoUnit.DAYS.between(lastOverdueGenerated, LocalDate.now());
+                overdueFine = days * 2;
+                user.setLastOverdueGenerated(lastOverdueGenerated);
+                user.setOverduefine(user.getOverduefine() + overdueFine);
+                userService.addUser(user);
+            }
+
+
+
+        }
+
     }
 
 

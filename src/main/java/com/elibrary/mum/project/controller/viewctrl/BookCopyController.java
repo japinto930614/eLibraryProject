@@ -37,36 +37,8 @@ public class BookCopyController {
     @GetMapping(value = "/browseoverdue")
     public ModelAndView displayListOfOverdueBooks() {
         ModelAndView modelAndView = new ModelAndView();
-        List<BookCopy> bookCopies = bookCopyService.getAllBookCopies();
+        List<BookCopy> overdues = bookCopyService.getOverdueCopies();
 
-        List<BookCopy> overdues = new ArrayList<BookCopy>();
-
-        for(BookCopy bookCopy : bookCopies){
-            int size = bookCopy.getCheckOutRecords().size();
-            if(size > 0) {
-                CheckOutRecord checkOutRecord = bookCopy.getCheckOutRecords().get(size - 1);
-                if (checkOutRecord.getOverdueDate().isBefore(LocalDate.now()) ||
-                checkOutRecord.getOverdueDate().isEqual(LocalDate.now())) {
-                    overdues.add(bookCopy);
-                }
-            }
-        }
-
-        for(Iterator<BookCopy> it = overdues.iterator(); it.hasNext();) {
-            BookCopy s = it.next();
-            int size = s.getCheckinRecords().size();
-            if(size > 0){
-
-                CheckinRecord checkinRecord = s.getCheckinRecords().get(size - 1);
-                if(checkinRecord.getCheckInDate().isBefore(LocalDate.now()) ||
-                        checkinRecord.getCheckInDate().isEqual(LocalDate.now())){
-
-                        it.remove();
-
-                }
-            }
-
-        }
 
 
 
@@ -90,7 +62,9 @@ public class BookCopyController {
         List<BookCopy> bookCopies = bookCopyService.getAllBookCopies().stream()
                 .filter(x -> x.getBookCopyNumber() == Long.parseLong(q))
                 .collect(Collectors.toList());
-        modelAndView.addObject("bookCopies", bookCopies);
+
+            modelAndView.addObject("bookCopies", bookCopies);
+
         modelAndView.setViewName("secured/bookcopy/browse");
         return modelAndView;
     }
@@ -100,11 +74,9 @@ public class BookCopyController {
                            @RequestParam(value = "bookCopyNumber", required = false)String bookCopyNumber, Model model){
 
 
-        List<User> users = userService.getAllUsers().stream()
-                    .filter(x -> x.getUserNumber() == Long.parseLong(usernumber)).collect(Collectors.toList());
+        List<User> users = getUsersByUserNumber(usernumber);
 
-        List<BookCopy> bookCopies = bookCopyService.getAllBookCopies().stream()
-                    .filter(x -> x.getBookCopyNumber() == Long.parseLong(bookCopyNumber)).collect(Collectors.toList());
+        List<BookCopy> bookCopies = getBookCopiesByBookCopyNumber(bookCopyNumber);
 
         BookCopy bookCopy = bookCopies.get(0);
         if(!users.isEmpty()) {
@@ -122,11 +94,9 @@ public class BookCopyController {
                            @RequestParam(value = "bookCopyNumber", required = false)String bookCopyNumber, Model model){
 
 
-        List<User> users = userService.getAllUsers().stream()
-                .filter(x -> x.getUserNumber() == Long.parseLong(usernumber)).collect(Collectors.toList());
+        List<User> users = getUsersByUserNumber(usernumber);
 
-        List<BookCopy> bookCopies = bookCopyService.getAllBookCopies().stream()
-                .filter(x -> x.getBookCopyNumber() == Long.parseLong(bookCopyNumber)).collect(Collectors.toList());
+        List<BookCopy> bookCopies = getBookCopiesByBookCopyNumber(bookCopyNumber);
 
         BookCopy bookCopy = bookCopies.get(0);
         if(!users.isEmpty()) {
@@ -137,4 +107,17 @@ public class BookCopyController {
 
         return "redirect:/eLibraryFinal/secured/bookcopy/browse";
     }
+
+    private List<User> getUsersByUserNumber(String usernumber){
+        return userService.getAllUsers().stream()
+                .filter(x -> x.getUserNumber() == Long.parseLong(usernumber)).collect(Collectors.toList());
+    }
+
+    private List<BookCopy> getBookCopiesByBookCopyNumber(String bookCopyNumber){
+        return bookCopyService.getAllBookCopies().stream()
+                .filter(x -> x.getBookCopyNumber() == Long.parseLong(bookCopyNumber)).collect(Collectors.toList());
+    }
+
+
+
 }

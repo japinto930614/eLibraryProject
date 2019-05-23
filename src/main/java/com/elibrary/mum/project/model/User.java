@@ -20,6 +20,7 @@ public class User {
     private int age;
     private String email;
     private LocalDate registrationDate = LocalDate.now();
+    private LocalDate lastOverdueGenerated;
 
     private double overduefine = 0.0;
 
@@ -121,5 +122,13 @@ public class User {
 
     public List<CheckOutRecord> getCheckOutRecords() {
         return checkOutRecords;
+    }
+
+    public LocalDate getLastOverdueGenerated() {
+        return lastOverdueGenerated;
+    }
+
+    public void setLastOverdueGenerated(LocalDate lastOverdueGenerated) {
+        this.lastOverdueGenerated = lastOverdueGenerated;
     }
 }
